@@ -9,7 +9,7 @@ const Host = ({ textData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [addReviewText, setAddReviewText] = useState('');
   // const [visibleReview, setVisibleReview] = useState([]);
-  const { rate, starArr, reactionStar, totalRating, makeZero } =
+  const { rate, starArr, makeGuestStar, reactionStar, totalRating, makeZero } =
     useStarRating(5);
   const token = localStorage.getItem('token');
   const id = textData?.hostId;
@@ -171,16 +171,12 @@ const Host = ({ textData }) => {
               <Style.PaddingTop>아직 후기가 없습니다.</Style.PaddingTop>
             ) : (
               reviewData?.map((hostreview, idx) => {
-                let guestStar = Array.from(
-                  { length: hostreview.rating },
-                  () => 0,
-                );
                 return (
                   <Style.ReviewDetail key={idx}>
                     <Style.Name>
                       <Style.Bold>{hostreview?.guestName}</Style.Bold>
                       <Style.GuestStar>
-                        {guestStar.map(star => {
+                        {makeGuestStar(hostreview.rating).map(star => {
                           return <FontAwesomeIcon key={star} icon={faStar} />;
                         })}
                       </Style.GuestStar>

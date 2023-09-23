@@ -23,7 +23,11 @@ const useStarRating = standard => {
     setRate(0);
   };
 
-  return { rate, starArr, reactionStar, totalRating, makeZero };
+  const makeGuestStar = rating => {
+    return Array.from({ length: rating }, () => 0);
+  };
+
+  return { rate, starArr, makeGuestStar, reactionStar, totalRating, makeZero };
 };
 
 export default useStarRating;
