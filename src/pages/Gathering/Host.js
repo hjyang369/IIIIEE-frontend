@@ -10,20 +10,21 @@ const Host = ({ textData }) => {
   const [addReviewText, setAddReviewText] = useState('');
   // const [visibleReview, setVisibleReview] = useState([]);
   const { rate, starArr, reactionStar, totalRating, makeZero } =
-    useStarRating();
+    useStarRating(5);
   const token = localStorage.getItem('token');
   const id = textData?.hostId;
   const [reviewData, setReviewData] = useState([]);
 
   useEffect(() => {
     if (textData?.hostId) {
-      fetch(`http://${process.env.REACT_APP_IP}/reviews/${id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      // fetch(`http://${process.env.REACT_APP_IP}/reviews/${id}`, {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // })
+      fetch('/data/hostReview.json')
         .then(response => response.json())
         .then(result => setReviewData(result.data));
     }
@@ -120,9 +121,9 @@ const Host = ({ textData }) => {
                     <Style.Name>
                       <Style.Bold>{textData.guestName}</Style.Bold>
                       <Style.AllStar>
-                        {starArr?.map((star, idx) => {
+                        {starArr?.map(star => {
                           return (
-                            <Style.AllStar star={star <= rate} key={idx}>
+                            <Style.AllStar starRange={star <= rate} key={star}>
                               <FontAwesomeIcon
                                 icon={faStar}
                                 onClick={() => reactionStar(star)}
@@ -179,8 +180,8 @@ const Host = ({ textData }) => {
                     <Style.Name>
                       <Style.Bold>{hostreview?.guestName}</Style.Bold>
                       <Style.GuestStar>
-                        {guestStar.map((star, idx) => {
-                          return <FontAwesomeIcon key={idx} icon={faStar} />;
+                        {guestStar.map(star => {
+                          return <FontAwesomeIcon key={star} icon={faStar} />;
                         })}
                       </Style.GuestStar>
                     </Style.Name>

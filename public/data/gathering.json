@@ -5,11 +5,11 @@
     "restaurantName": "restaurant6",
     "roomImage": "/images/logo.png",
     "roomTitle": "양동희의 식도락여행",
-    "price": 80000.0,
+    "totalPrice": 80000.0,
     "genderId": 3,
-    "gender": "여성",
+    "roomGender": "여성",
     "ageId": 3,
-    "ageRange": "40대",
+    "roomAgeRange": "40대",
     "roomTag": ["직장인", "혼밥", "싫어요"],
     "roomContent": "같이 밥먹어요. 해치지 않아요. 안 무서워요. 고기 잘 구워요. 같이 밥먹어요. 해치지 않아요. 안 무서워요. 고기 잘 구워요.같이 밥먹어요. 해치지 않아요. 안 무서워요. 고기 잘 구워요.같이 밥먹어요. 해치지 않아요. 안 무서워요. 고기 잘 구워요.같이 밥먹어요. 해치지 않아요. 안 무서워요. 고기 잘 구워요.같이 밥먹어요. 해치지 않아요. 안 무서워요. 고기 잘 구워요.같이 밥먹어요. 해치지 않아요. 안 무서워요. 고기 잘 구워요.",
     "roomYear": "2023",
@@ -18,7 +18,7 @@
     "reservationTime": "02:00",
     "numberOfRoomPeople": "2",
     "roomMaxPeople": 5,
-    "roomStatus": 1,
+    "roomStatusId": 3,
     "roomStatusName": "CREATED",
     "hostId": 1,
     "hostName": "찌니최",
@@ -26,8 +26,9 @@
     "hostAge": "20대",
     "hostNickname": null,
     "hostBirthdate": null,
-    "hostProfileImage": null,
+    "hostProfileImage": "/images/IMG_7631.jpg",
     "hostEmail": null,
-    "hostPhoneNumber": null
+    "hostPhoneNumber": null,
+    "guestName": "꿀빵쓰"
   }
 }

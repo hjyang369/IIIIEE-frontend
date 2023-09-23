@@ -3,7 +3,7 @@ import HostListStyle from './HostListStyle';
 import useRequireAuth from '../../hooks/useRequireAuth';
 import { useNavigate } from 'react-router-dom';
 
-const HoseList = () => {
+const HostList = () => {
   const loading = useRequireAuth();
   const [listData, setListData] = useState([]);
   const REACT_APP_SERVICE_APP_ADMIN_KEY =
@@ -129,4 +129,4 @@ const HoseList = () => {
   );
 };
 
-export default HoseList;
+export default HostList;

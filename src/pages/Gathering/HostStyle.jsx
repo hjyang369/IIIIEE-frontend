@@ -139,7 +139,8 @@ const Style = {
     svg {
       font-size: 1.3em;
       path {
-        color: ${props => (props.star ? props.theme.mainColor : 'lightgray')};
+        color: ${props =>
+          props.starRange ? props.theme.mainColor : 'lightgray'};
         cursor: pointer;
       }
     }

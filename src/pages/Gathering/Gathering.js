@@ -8,10 +8,9 @@ import useRequireAuth from '../../hooks/useRequireAuth';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Gathering = () => {
-  const loading = useRequireAuth();
+  // const loading = useRequireAuth();
   const token = localStorage.getItem('token');
   const [textData, setTextData] = useState({});
-
   const [checkBell, setCheckBell] = useState(false);
   const params = useParams();
   const room = params.room;
@@ -19,13 +18,14 @@ const Gathering = () => {
   const applyBtnCondition = textData?.roomStatusId === 1;
 
   useEffect(() => {
-    fetch(`http://${process.env.REACT_APP_IP}/rooms/info/${room}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    // fetch(`http://${process.env.REACT_APP_IP}/rooms/info/${room}`, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    fetch('/data/gathering.json')
       .then(response => response.json())
       .then(result => setTextData(result.data));
   }, [room]);
@@ -50,9 +50,9 @@ const Gathering = () => {
       });
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <Style.Full>
@@ -72,7 +72,6 @@ const Gathering = () => {
             setCheckBell(!checkBell);
           }}
         >
-          {/* <Icon name="bell" /> */}
           <FontAwesomeIcon icon={faBell} />
         </Style.Container>
         <Style.Container>
