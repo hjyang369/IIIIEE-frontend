@@ -82,7 +82,8 @@
 - 전체 값 state로 관리
 - 유저가 직접 작성할 수 있는 태그 추가 및 삭제
 
-![폼데이터로 이미지 전송](https://github.com/hjyang369/IIIIEE-frontend/assets/125977702/10fcc439-53af-442c-b634-f3019d245df5)
+![폼데이터로 이미지 전송](https://github.com/hjyang369/IIIIEE-frontend/assets/125977702/185fdf96-38de-4992-9189-5677382e5f0a)
+
 
 #### 모임 목록 페이지
 - 레이아웃
@@ -93,7 +94,8 @@
 - 신청인원이 모두 찼을 때 예약하기 버튼 활성화
 - 유저가 만든 모임 모두 가져오는 get 요청
 
-![iiiee 결제 api 사용](https://github.com/hjyang369/IIIIEE-frontend/assets/125977702/6ee38d93-3c00-4a5e-9a7f-217fe79c548b)
+![iiiee 결제 api 사용](https://github.com/hjyang369/IIIIEE-frontend/assets/125977702/31fe214e-b338-4b9f-b5dc-61aa25d19643)
+
 
 #### 404페이지 및 frame 페이지
 - 레이아웃 및 라우터 구성
