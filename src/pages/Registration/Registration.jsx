@@ -27,7 +27,6 @@ const Registration = () => {
   const [visibleTime, setVisibleTime] = useState('00:00');
   const [afterPost, setAfterPost] = useState(false);
   const [saveRoomId, setSaveRoomId] = useState();
-  const [saveFormdata, setSaveFormdata] = useState({});
 
   const { getData: ageDatas } = useFetch(
     //백엔드용
@@ -97,30 +96,26 @@ const Registration = () => {
     setVisibleTime(value);
   };
 
-  let formData = new FormData();
-
-  const saveImgFile = _formdata => {
+  const saveImgFile = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setUploadImg(reader.result);
     };
-    _formdata.append('image', file);
-    _formdata.append('roomId', saveRoomId);
-    setSaveFormdata(formData);
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
-    return _formdata;
   };
-  const postImg = async _formdata => {
+
+  const postImg = async () => {
+    const imgData = new FormData();
+    imgData.append('image', imgRef.current.files[0]);
+    imgData.append('roomId', saveRoomId);
+
     await fetch(`http://${process.env.REACT_APP_IP}/rooms/image`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      body: _formdata,
+      body: imgData,
     })
       .then(response => {
         return response.json();
@@ -364,7 +359,7 @@ const Registration = () => {
             type="file"
             accept="image/*"
             id="file"
-            onChange={() => saveImgFile(formData)}
+            onChange={saveImgFile}
             ref={imgRef}
           />
         </style.FileForm>
@@ -376,7 +371,7 @@ const Registration = () => {
           <style.RegisteBtn
             disabled={!imgRef?.current?.files[0]?.name}
             condition={imgRef?.current?.files[0]?.name}
-            onClick={() => postImg(saveFormdata)}
+            onClick={postImg}
           >
             등록
           </style.RegisteBtn>
