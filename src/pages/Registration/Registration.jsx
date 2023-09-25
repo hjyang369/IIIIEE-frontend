@@ -11,10 +11,12 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import useSelectBtn from '../../hooks/useSelectBtn';
 import style from './RegistrationStyle';
 import useFetch from '../../hooks/useFetch';
-import useRequireAuth from '../../hooks/useRequireAuth';
+//로그인 권한
+// import useRequireAuth from '../../hooks/useRequireAuth';
 
 const Registration = () => {
-  const loading = useRequireAuth();
+  //로그인 권한
+  // const loading = useRequireAuth();
   const [value, onChange] = useState(new Date());
   const [uploadImg, setUploadImg] = useState(null);
   const imgRef = useRef();
@@ -26,19 +28,27 @@ const Registration = () => {
   const [afterPost, setAfterPost] = useState(false);
   const [saveRoomId, setSaveRoomId] = useState();
   const [saveFormdata, setSaveFormdata] = useState({});
+
   const { getData: ageDatas } = useFetch(
-    `http://${process.env.REACT_APP_IP}/rooms/categories/ages`,
+    //백엔드용
+    // `http://${process.env.REACT_APP_IP}/rooms/categories/ages`,
+    '/data/age.json',
   );
   const { getData: genderDatas } = useFetch(
-    `http://${process.env.REACT_APP_IP}/rooms/categories/genders`,
+    //백엔드용
+    // `http://${process.env.REACT_APP_IP}/rooms/categories/genders`,
+    '/data/gender.json',
   );
   const { getData: timeDatas } = useFetch(
-    `http://${process.env.REACT_APP_IP}/rooms/categories/times`,
+    //백엔드용
+    // `http://${process.env.REACT_APP_IP}/rooms/categories/times`,
+    '/data/time.json',
   );
   const params = useParams();
   const restaurant = params.restaurant;
   const { getData: idDatas } = useFetch(
-    `http://${process.env.REACT_APP_IP}/restaurants/${restaurant}`,
+    // `http://${process.env.REACT_APP_IP}/restaurants/${restaurant}`,
+    '/data/RestaurantInfoData.json',
   );
 
   const token = localStorage.getItem('token');
@@ -87,26 +97,30 @@ const Registration = () => {
     setVisibleTime(value);
   };
 
-  const saveImgFile = e => {
-    const formData = new FormData();
-    setSaveFormdata(e.target.files[0]);
+  let formData = new FormData();
+
+  const saveImgFile = _formdata => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setUploadImg(reader.result);
     };
-    formData.append('image', file);
-    formData.append('roomId', saveRoomId);
+    _formdata.append('image', file);
+    _formdata.append('roomId', saveRoomId);
     setSaveFormdata(formData);
+    // for (let value of formData.values()) {
+    //   console.log(value);
+    // }
+    return _formdata;
   };
-  const postImg = async () => {
+  const postImg = async _formdata => {
     await fetch(`http://${process.env.REACT_APP_IP}/rooms/image`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      body: saveFormdata,
+      body: _formdata,
     })
       .then(response => {
         return response.json();
@@ -204,9 +218,10 @@ const Registration = () => {
     clickBtn.age &&
     clickBtn.gender;
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  //로그인 권한
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <style.Full>
@@ -328,47 +343,47 @@ const Registration = () => {
           })}
         </style.TagBtns>
       </style.TagBtn>
-      {!afterPost ? (
+      {/* {!afterPost ? ( */}
+      <style.RegisteBtns>
+        <style.RegisteBtn
+          disabled={!condition}
+          condition={condition}
+          onClick={createRoom}
+        >
+          등록
+        </style.RegisteBtn>
+        <button onClick={cancel}>취소</button>
+      </style.RegisteBtns>
+      {/* ) : ( */}
+      <style.ImgBox>
+        <style.FileForm>
+          <label for="file">
+            이 곳을 클릭해 모임을 대표할 사진을 올려주세요.
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            id="file"
+            onChange={() => saveImgFile(formData)}
+            ref={imgRef}
+          />
+        </style.FileForm>
+        <style.GatheringImg
+          src={uploadImg ? uploadImg : '/images/logo.png'}
+          alt="모임 이미지"
+        />
         <style.RegisteBtns>
           <style.RegisteBtn
-            disabled={!condition}
-            condition={condition}
-            onClick={createRoom}
+            disabled={!imgRef?.current?.files[0]?.name}
+            condition={imgRef?.current?.files[0]?.name}
+            onClick={() => postImg(saveFormdata)}
           >
             등록
           </style.RegisteBtn>
-          <button onClick={cancel}>취소</button>
+          <button onClick={cancelImg}>취소</button>
         </style.RegisteBtns>
-      ) : (
-        <style.ImgBox>
-          <style.FileForm>
-            <label for="file">
-              이 곳을 클릭해 모임을 대표할 사진을 올려주세요.
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              id="file"
-              onChange={saveImgFile}
-              ref={imgRef}
-            />
-          </style.FileForm>
-          <style.GatheringImg
-            src={uploadImg ? uploadImg : '/images/logo.png'}
-            alt="모임 이미지"
-          />
-          <style.RegisteBtns>
-            <style.RegisteBtn
-              disabled={!imgRef?.current?.files[0]?.name}
-              condition={imgRef?.current?.files[0]?.name}
-              onClick={postImg}
-            >
-              등록
-            </style.RegisteBtn>
-            <button onClick={cancelImg}>취소</button>
-          </style.RegisteBtns>
-        </style.ImgBox>
-      )}
+      </style.ImgBox>
+      {/* )} */}
     </style.Full>
   );
 };

@@ -18,17 +18,23 @@ const Gathering = () => {
   const navigate = useNavigate();
   const applyBtnCondition = textData?.roomStatusId === 1;
 
+  // useEffect(() => {
+  //   fetch(`http://${process.env.REACT_APP_IP}/rooms/info/${room}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => setTextData(result.data));
+  // }, [room]);
+
   useEffect(() => {
-    fetch(`http://${process.env.REACT_APP_IP}/rooms/info/${room}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch('/data/gathering.json')
       .then(response => response.json())
       .then(result => setTextData(result.data));
-  }, [room]);
+  }, []);
 
   const applyToGathering = () => {
     fetch(`http://${process.env.REACT_APP_IP}/rooms/${room}/joinRoom`, {
