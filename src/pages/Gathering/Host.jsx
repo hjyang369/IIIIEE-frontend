@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Style from './HostStyle.jsx';
+import Style from './HostStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faStar } from '@fortawesome/free-solid-svg-icons';
 import { styled } from 'styled-components';
