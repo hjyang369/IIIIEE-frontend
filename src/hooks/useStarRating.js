@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-const useStarRating = () => {
+const useStarRating = standard => {
   const [rate, setRate] = useState(0);
-  const starArr = [1, 2, 3, 4, 5];
+
+  const starArr = Array.from({ length: standard }, (v, i) => i + 1);
 
   const reactionStar = id => {
     setRate(id);
@@ -22,7 +23,11 @@ const useStarRating = () => {
     setRate(0);
   };
 
-  return { rate, starArr, reactionStar, totalRating, makeZero };
+  const makeGuestStar = rating => {
+    return Array.from({ length: rating }, () => 0);
+  };
+
+  return { rate, starArr, makeGuestStar, reactionStar, totalRating, makeZero };
 };
 
 export default useStarRating;

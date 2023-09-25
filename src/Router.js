@@ -5,7 +5,7 @@ import Gathering from './pages/Gathering/Gathering';
 import Frame from './components/Frame';
 import Registration from './pages/Registration/Registration';
 import RestaurantInfo from './pages/RestaurantInfo/RestaurantInfo';
-import HoseList from './pages/HostList/HoseList';
+import HostList from './pages/HostList/HoseList';
 import KakaoLogin from './components/Nav/KakaoLogin';
 import GuestList from './pages/GuestList/GuestList';
 import PayFail from './pages/HostList/PayFail';
@@ -24,13 +24,10 @@ const Router = () => {
             path="restaurantInfo/:restaurantId"
             element={<RestaurantInfo />}
           />
-          <Route path="hostList" element={<HoseList />} />
+          <Route path="hostList" element={<HostList />} />
           <Route path="kakakoLogin" element={<KakaoLogin />} />
           <Route path="payFail" element={<PayFail />} />
           <Route path="kakaopay" element={<KakaoPay />} />
-          <Route path="registration" element={<Registration />} />
-          <Route path="gathering/:roomId" element={<Gathering />} />
-          <Route path="hostList" element={<HoseList />} />
           <Route path="guestlist" element={<GuestList />} />
         </Route>
         <Route path="*" element={<NotFound />} />
